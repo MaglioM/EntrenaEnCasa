@@ -1,0 +1,72 @@
+body{
+    
+    background-image: url("../resource/background.png");
+    background-size: cover;
+    overflow: hidden;
+}
+
+@font-face {
+    font-family: Snowy Night;
+    src: url(../resource/snowy_night.ttf);
+  }
+
+  p{
+    
+    font-family: Snowy Night;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 312.5%;
+    color: maroon;
+    text-align: center;
+    border-color: black;
+    
+}
+
+.title{
+    
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width:45%;
+	
+    
+}
+
+.register_button{
+    position:fixed;
+    overflow:hidden;
+    font-family: Snowy Night;
+    background-color: #4CAF50;
+    border-radius: 250% 250% 250% 250%;
+    color: white;
+    padding: 0.7% 0.7%;
+    align-items: center;
+    border: 20%;
+    text-align: center;
+    text-decoration: none;
+    display:inline-block ;
+    top:80%;
+    font-size: 375%;
+    left: 20%;
+   
+    
+    
+}
+.login_button{
+    position:fixed;
+    overflow:hidden;
+    font-family: Snowy Night;
+    background-color: #4CAF50;
+    border-radius: 250% 250% 250% 250%;
+    color: white;
+    padding: 0.7% 0.7%;
+    align-items: center;
+    border: 20%;
+    text-align: center;
+    text-decoration: none;
+    display:inline-block ;
+    top:80%;
+    right: 20%;
+    font-size: 375%;
+    
+}
