@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+
+ <form action="/ingresado", method="POST">
+  <label for="lname">E-Mail:</label><br>
+  <input type="text" id="email" name="email"><br>
+  <label for="lname">Contraseña:</label><br>
+  <input type="text" id="pass" name="pass"><br>
+  <button type="submit">Ingresar</button>
+ </form>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+	<p id="error">{{message}}</p>
+{% endfor %}
+{% endif %}
+{% endwith %}
