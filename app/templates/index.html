@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Entrena en casa</title>
-    <link rel="icon" href="resource\shortcut_icon.png">
-    <link rel="stylesheet" href="css/css.css">
+    <link rel="icon" href="{{url_for("static", filename="resource/shortcut_icon.png")}}">
+    <link rel="stylesheet" href="{{url_for("static", filename="css/css.css")}}">
 
 </head>
 <body>
     <div class="title">
-    <img src="resource/title.png" width="">
+        <img src="{{url_for("static", filename="resource/title.png")}}" >
     </div>
     <p>"Conviertete en un maestro de las artes marciales"</p>
     <a class="register_button" href="register">Crear cuenta</a>
