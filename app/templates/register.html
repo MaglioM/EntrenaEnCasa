@@ -14,3 +14,10 @@
   <button type="submit">Registrarse</button>
 </form>
 
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+	<p id="error">{{message}}</p>
+{% endfor %}
+{% endif %}
+{% endwith %}
