@@ -5,11 +5,10 @@ body{
     
 }
 .contenedor{
-    width:800px;
-    height: 600px;
-    overflow:hideen;
-    position: center;
-    align-items:center;
+    width: 100%;
+    height: 100%;
+    overflow:visible;
+    position: fixed;
     
     
 }
@@ -20,21 +19,20 @@ body{
   }
 
 
-.h1 h1{
-    align-items:center;
-    position:absolute;
+.h1{
+    width: 100%;
+    height: 100%;
+    position:fixed;
     overflow:visible;
     inline-size: center;
     font-family: Snowy Night;
     font-size: 250%;
-    left:20%;
+    left: 0%;
     top:60%;
     color: maroon;
     text-align: center;
     border-color: black;
     margin: 1%;
-
-    
     animation-name: cambio;
     animation-duration: 7s;
     animation-iteration-count: infinite;
@@ -51,15 +49,15 @@ body{
     
 }
 
-.title {
-    align-items:center;
-    position:absolute;
+.title{
+    
+    position:fixed;
     overflow:visible;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
     
-    left:35%;
+    left: 0%;
     top: 5%;
     
     
@@ -67,9 +65,9 @@ body{
     
 }
 
-.register_button a{
-    width: center;
-    position:absolute;
+.register_button{
+    width: 20%;
+    position:fixed;
     overflow:auto;
     font-family: Snowy Night;
     background-color: #4CAF50;
@@ -79,18 +77,18 @@ body{
     align-items: center;
     border: 20%;
     text-align: center;
-    text-decoration:none;
-    display:inline-block ;
-    top:80%;
+    text-decoration: none;
+    
+    top:20%;
     font-size: 260%;
-    left:20%;
+    left: 20%;
    
     
     
 }
-.login_button a{
-    width: center;
-    position:absolute;
+.login_button{
+    width: 20%;
+    position:fixed;
     overflow:auto;
     font-family: Snowy Night;
     background-color: #4CAF50;
@@ -100,8 +98,8 @@ body{
     align-items: center;
     border: 20%;
     text-align: center;
-    text-decoration:none;
-    display:inline-block ;
+    text-decoration: none;
+    
     top:80%;
     right: 20%;
     font-size: 260%;
