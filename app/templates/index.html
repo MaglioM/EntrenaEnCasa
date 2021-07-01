@@ -2,19 +2,22 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimun-scale=1.0">
+
     <title>Entrena en casa</title>
     <link rel="icon" href="{{url_for("static", filename="resource/shortcut_icon.png")}}">
     <link rel="stylesheet" href="{{url_for("static", filename="css/css.css")}}">
-
+    
 </head>
 <body>
-    <section><div class="title"><img src="{{url_for("static", filename="resource/title.png")}}" width=600px ></div>
-        
+    <section class="contenedor">
+        <div class="title"><img src="{{url_for("static", filename="resource/title.png")}}" width=600px ></div>
+        <h1 class="h1">"Conviertete en un maestro de las artes marciales"</h1>
+        <a class="register_button" href="register">Crear cuenta</a>
+        <a class="login_button" href="login">Iniciar sesión</a>
     
-        <p>"Conviertete en un maestro de las artes marciales"</p></section>
+    </section>
     
-    <a class="register_button" href="register">Crear cuenta</a>
-    <a class="login_button" href="login">Iniciar sesión</a>
+    
 </body>
 </html>
