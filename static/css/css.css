@@ -5,11 +5,7 @@ body{
     
 }
 .contenedor{
-    width:800px;
-    height: 600px;
-    overflow:hideen;
-    position: center;
-    align-items:center;
+    
     
     
 }
@@ -21,14 +17,9 @@ body{
 
 
 .h1 h1{
-    align-items:center;
-    position:absolute;
-    overflow:visible;
-    inline-size: center;
+    
     font-family: Snowy Night;
     font-size: 250%;
-    left:20%;
-    top:60%;
     color: maroon;
     text-align: center;
     border-color: black;
@@ -52,14 +43,9 @@ body{
 }
 
 .title {
-    align-items:center;
-    position:absolute;
-    overflow:visible;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
     
-    left:35%;
+   
+    text-align: center;
     top: 5%;
     
     
@@ -81,7 +67,7 @@ body{
     text-align: center;
     text-decoration:none;
     display:inline-block ;
-    top:80%;
+    top:70%;
     font-size: 260%;
     left:20%;
    
@@ -102,7 +88,7 @@ body{
     text-align: center;
     text-decoration:none;
     display:inline-block ;
-    top:80%;
+    top:70%;
     right: 20%;
     font-size: 260%;
     

@@ -4,14 +4,7 @@ body{
     background-size: cover;
     
 }
-.contenedor{
-    width: 100%;
-    height: 100%;
-    overflow:visible;
-    position: fixed;
-    
-    
-}
+
 
 @font-face {
     font-family: Snowy Night;
@@ -20,15 +13,11 @@ body{
 
 
 .h1{
-    width: 100%;
-    height: 100%;
-    position:fixed;
-    overflow:visible;
-    inline-size: center;
+   
+   
     font-family: Snowy Night;
     font-size: 250%;
-    left: 0%;
-    top:60%;
+    
     color: maroon;
     text-align: center;
     border-color: black;
@@ -49,20 +38,9 @@ body{
     
 }
 
-.title{
-    
-    
-    text-align: center;
-    
-    
-    top: 5%;
-    
-    
-	
-    
-}
 
-.register_button{
+
+.email{
     width: 20%;
     position:fixed;
     overflow:auto;
@@ -83,7 +61,7 @@ body{
     
     
 }
-.login_button{
+.pass{
     width: 20%;
     position:fixed;
     overflow:auto;
@@ -101,4 +79,22 @@ body{
     right: 20%;
     font-size: 260%;
     
+}
+#error{
+    width: 20%;
+    position:fixed;
+    overflow:auto;
+    font-family: Snowy Night;
+    background-color: #4CAF50;
+    border-radius: 50% 50% 50% 50%;
+    color: white;
+    padding: 0.7% 0.7%;
+    align-items: center;
+    border: 20%;
+    text-align: center;
+    text-decoration: none;
+    
+    top:90%;
+    right: 50%;
+    font-size: 260%;
 }

@@ -1,17 +1,36 @@
 <!DOCTYPE HTML>
+<html lang="es">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimun-scale=1.0">
 
- <form action="/ingresado", method="POST">
-  <label for="lname">E-Mail:</label><br>
-  <input type="text" id="email" name="email"><br>
-  <label for="lname">Contraseña:</label><br>
-  <input type="text" id="pass" name="pass"><br>
-  <button type="submit">Ingresar</button>
- </form>
+    <title>Entrena en casa</title>
+    <link rel="icon" href="{{url_for("static", filename="resource/shortcut_icon.png")}}">
+    <link rel="stylesheet" href="{{url_for("static", filename="css/css_login.css")}}">
+    </head>
+<body>
+    <div class="h1"><h1>"Entrena en casa"</h1></div>
+    
+        
+    <form action="/ingresado", method="POST">
+        <div class="email"><label for="lname">E-Mail:</label><br>
+            <input type="text" id="email" name="email"><br>
+        </div>
+        <div class="pass"> <label for="lname">Contraseña:</label><br>
+            <input type="text" id="pass" name="pass"><br>
+        </div>
+        <button class="ingresar" type="submit">Ingresar</button>
+       
+        
+       </form>
 
-{% with messages = get_flashed_messages() %}
+       {% with messages = get_flashed_messages() %}
 {% if messages %}
 {% for message in messages %}
 	<p id="error">{{message}}</p>
 {% endfor %}
 {% endif %}
 {% endwith %}
+    </body>
+    </html>
+
