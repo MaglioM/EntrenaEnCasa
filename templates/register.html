@@ -1,17 +1,38 @@
 <!DOCTYPE HTML>
+<html lang="es">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimun-scale=1.0">
 
+    <title>Entrena en casa</title>
+    <link rel="icon" href="{{url_for("static", filename="resource/shortcut_icon.png")}}">
+    <link rel="stylesheet" href="{{url_for("static", filename="css/css_register.css")}}">
+    </head>
+<body>
  <form action="/registered", method="POST">
-  <label for="fname">Nombre:</label><br>
-  <input type="text" id="nombre" name="nombre"><br>
-  <label for="lname">Apellido:</label><br>
-  <input type="text" id="apellido" name="apellido"><br>
-  <label for="lname">E-Mail:</label><br>
-  <input type="text" id="email" name="email"><br>
-  <label for="lname">Contraseña:</label><br>
-  <input type="text" id="pass" name="pass"><br>
-  <label for="lname">Repetir contraseña:</label><br>
-  <input type="text" id="pass2" name="pass2"><br>
-  <button type="submit">Registrarse</button>
+  <div class="nombre">
+    <label for="fname">Nombre:</label><br>
+    <input type="text" id="nombre" name="nombre"><br>
+  </div>
+  <div class="apellido">
+    <label for="lname">Apellido:</label><br>
+    <input type="text" id="apellido" name="apellido"><br>
+  </div>
+  
+  <div class="email">
+    <label  for="lname">E-Mail:</label><br>
+    <input type="text" id="email" name="email"><br>
+</div>
+  <div class="contraseña">
+    <label for="lname">Contraseña:</label><br>
+    <input type="text" id="pass" name="pass"><br>
+  </div>
+  <div class="repetir">
+    <label for="lname">Repetir contraseña:</label><br>
+    <input type="text" id="pass2" name="pass2"><br>
+  </div>
+ 
+  <button class="boton" type="submit">Registrarse</button>
 </form>
 
 {% with messages = get_flashed_messages() %}
@@ -21,3 +42,5 @@
 {% endfor %}
 {% endif %}
 {% endwith %}
+</body>
+</html>

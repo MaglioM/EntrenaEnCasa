@@ -40,8 +40,30 @@ body{
 
 
 
-.pass{
+.nombre{
     
+    
+    position:fixed;
+    overflow:auto;
+    width: 20%;
+    font-family: Snowy Night;
+    background-color: #4CAF50;
+    border-radius: 50% 50% 50% 50%;
+    color: white;
+    padding: 0.7% 0.7%;
+    align-items: center;
+    border: 20%;
+    text-align: center;
+    text-decoration: none;
+    left:37%;
+    top:5%;
+    
+    font-size: 200%;
+   
+    
+    
+}
+.apellido{
     width: 20%;
     position:fixed;
     overflow:auto;
@@ -55,11 +77,9 @@ body{
     text-align: center;
     text-decoration: none;
     
-    top:30%;
-    right: 25%;
-    font-size: 260%;
-   
-    
+    left:37%;
+    top:22%;
+    font-size: 200%;
     
 }
 .email{
@@ -73,15 +93,15 @@ body{
     padding: 0.7% 0.7%;
     align-items: center;
     border: 20%;
-    text-align: center;
-    text-decoration: none;
     
-    top:30%;
-    left: 25%;
-    font-size: 260%;
+    text-decoration: none;
+    text-align: center;
+    top:39%;
+    left: 37%;
+    font-size: 200%;
     
 }
-.ingresar{
+.contraseña{
     width: 20%;
     position:fixed;
     overflow:auto;
@@ -95,10 +115,47 @@ body{
     
     text-decoration: none;
     text-align: center;
-    top:52%;
-    left: 40%;
-    font-size: 260%;
+    top:56%;
+    left: 37%;
+    font-size: 200%;
     
+}
+.repetir{
+    width: 20%;
+    position:fixed;
+    overflow:auto;
+    font-family: Snowy Night;
+    background-color: #4CAF50;
+    border-radius: 50% 50% 50% 50%;
+    color: white;
+    padding: 0.7% 0.7%;
+    align-items: center;
+    border: 20%;
+    
+    text-decoration: none;
+    text-align: center;
+    top:73%;
+    left: 37%;
+    font-size: 200%;
+    
+}
+.boton{
+width: 20%;
+    position:fixed;
+    overflow:auto;
+    font-family: Snowy Night;
+    background-color: #4CAF50;
+    border-radius: 50% 50% 50% 50%;
+    color: white;
+    padding: 0.7% 0.7%;
+    align-items: center;
+    border: 20%;
+    
+    text-decoration: none;
+    text-align: center;
+    top:89%;
+    left: 37.5%;
+    font-size: 200%;
 }
 #error{
     width: 20%;
@@ -114,7 +171,7 @@ body{
     text-align: center;
     text-decoration: none;
     
-    top:42%;
-    left: 40%;
+    top:0%;
+    left: 37%;
     font-size: 100%;
 }
