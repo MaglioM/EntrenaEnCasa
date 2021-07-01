@@ -42,6 +42,32 @@ def registered():
             mysql.connection.commit()
             return render_template('index.html')
 
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+@app.route('/ingresado', methods=['POST'])
+def ingresado():
+    if request.method == 'POST':
+        #saca campos de la base
+        cursor = mysql.connection.cursor()
+        cursor.execute('SELECT Email FROM EntrenaEnCasa.Alumnos')
+        emailsValidos = []
+        for result in cursor.fetchall():
+            for email in result:
+                emailsValidos.append(email)
+        cursor.execute('SELECT Contraseña FROM EntrenaEnCasa.Alumnos')
+        passValidas = []
+        for result in cursor.fetchall():
+            for password in result:
+                passValidas.append(password)
+        #validacion
+        if request.form['email'] in emailsValidos and request.form['pass'] in passValidas:
+            return render_template('index.html')
+        else:
+            flash("Usuario no registrado")
+            return redirect(url_for('login'))
+
 
 if __name__ == "__main__":
     app.run(debug=True)
