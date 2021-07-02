@@ -63,7 +63,7 @@ def ingresado():
                 passValidas.append(password)
         #validacion
         if request.form['email'] in emailsValidos and request.form['pass'] in passValidas:
-            return render_template('index.html')
+            return render_template('inicio.html')
         else:
             flash("Usuario no registrado")
             return redirect(url_for('login'))
