@@ -62,12 +62,19 @@ def ingresado():
             for password in result:
                 passValidas.append(password)
         #validacion
-        if request.form['email'] in emailsValidos and request.form['pass'] in passValidas:
-            return render_template('inicio.html')
+        if request.form['email'] in emailsValidos:
+            cursor.execute('SELECT Contraseña FROM EntrenaEnCasa.Alumnos WHERE Email = '+'"'+(request.form['email']+'"'))
+            passValida = cursor.fetchall()[0][0]
+            if request.form['pass'] == passValida:
+                cursor.execute('SELECT Nombre FROM EntrenaEnCasa.Alumnos WHERE Email = '+'"'+(request.form['email']+'"'))
+                nombre = cursor.fetchall()[0][0]
+                return render_template('inicio.html',nombre=nombre)
+            else:
+                flash("Usuario no registrado")
+                return redirect(url_for('login'))
         else:
             flash("Usuario no registrado")
             return redirect(url_for('login'))
-
 
 if __name__ == "__main__":
     app.run(debug=True)
