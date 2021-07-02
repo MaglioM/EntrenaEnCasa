@@ -26,7 +26,10 @@ def register():
 @app.route('/registered', methods=['POST'])
 def registered():
     if request.method == 'POST':
-        if not request.form['pass'] == request.form['pass2']:
+        if request.form['nombre'] == '' or request.form['apellido'] == '' or request.form['email'] == '' or request.form['pass'] == '' or request.form['pass2'] == '':
+            flash("Todos los campos son obligatorios")
+            return redirect(url_for('register'))
+        elif not request.form['pass'] == request.form['pass2']:
             flash("Las contraseñas no coinciden")
             return redirect(url_for('register'))
         elif not "@" in request.form['email'] or not "." in request.form['email']:
