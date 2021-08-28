@@ -66,7 +66,7 @@ def ingresado():
                 passValidas.append(password)
         #validacion
         if request.form['email'] in emailsValidos:
-            cursor.execute('SELECT Contraseña FROM becridlgsxtglg0nm3o3Alumnos WHERE Email = '+'"'+(request.form['email']+'"'))
+            cursor.execute('SELECT Contraseña FROM becridlgsxtglg0nm3o3.Alumnos WHERE Email = '+'"'+(request.form['email']+'"'))
             passValida = cursor.fetchall()[0][0]
             if request.form['pass'] == passValida:
                 cursor.execute('SELECT Nombre FROM becridlgsxtglg0nm3o3.Alumnos WHERE Email = '+'"'+(request.form['email']+'"'))
