@@ -6,31 +6,47 @@
 
     <title>Entrena en casa</title>
     <link rel="icon" href="{{url_for("static", filename="resource/shortcut_icon.png")}}">
+    <link rel="stylesheet" href="{{url_for("static", filename="css/bootstrap.min.css")}}">
     <link rel="stylesheet" href="{{url_for("static", filename="css/css_login.css")}}">
     </head>
 <body>
-    <div class="h1"><h1>"Entrena en casa"</h1></div>
-    
-        
-    <form action="/ingresado", method="POST">
-        <div class="email"><label for="lname">E-Mail:</label><br>
-            <input type="text" id="email" name="email"><br>
+    <div class="container">       
+        <div class="row">
+            <div class="titulo text-center"><img src="{{url_for("static", filename="resource/title.png")}}" class="img-fluid" ></div>   
         </div>
-        <div class="pass"> <label for="lname">Contraseña:</label><br>
-            <input type="text" id="pass" name="pass"><br>
-        </div>
-        <button class="ingresar" type="submit">Ingresar</button>
-       
+        <div class="row">
+            <div class="col-12 h1"><h1>"Entrena en casa"</h1></div>
+        </div>        
         
-       </form>
+            <form class="row justify-content-between" action="/ingresado", method="POST">
+                <div class="col-12 col-sm-6 email text-center"><label class="col-6 col-sm-6 text-center " for="lname">E-Mail:<br><input class="col-12 col-sm-12 text-center " type="text" id="pass" name="pass"></label>
+                    
+                </div>
 
-       {% with messages = get_flashed_messages() %}
-{% if messages %}
-{% for message in messages %}
-	<p id="error">{{message}}</p>
-{% endfor %}
-{% endif %}
-{% endwith %}
+                <div class="col-12 col-sm-6 pass text-center"> <label class="col-6 col-sm-6 text-center " for="lname">Contraseña:<br><input class="col-12 col-sm-12 text-center " type="text" id="pass" name="pass"></label>
+                </div>
+
+                <div class="row justify-content-around">
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    {% for message in messages %}
+                      <h3 class="text-center" id="error">{{message}}</h3>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                   </div>
+
+                <div class="row">
+                    <a class="text-center"><button class="ingresar" type="submit">Ingresar</button></a>
+                </div>
+            </form>
+        
+               
+            
+        
+        
+    </div>
+    
     </body>
     </html>
 

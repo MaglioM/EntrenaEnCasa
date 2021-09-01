@@ -1,35 +1,25 @@
 body{
-    
+    margin:1%;
     background-image: url("../resource/background.png");
     background-size: cover;
-    
-}
-.contenedor{
-    
-    
-    
 }
 
 @font-face {
     font-family: Snowy Night;
-    src: url(../resource/snowy_night.ttf);
+    src: url("../resource/snowy_night.ttf");
   }
 
 
-.h1 h1{
-    
+.h2{
+    padding: 4%;
     font-family: Snowy Night;
-    font-size: 250%;
     color: maroon;
     text-align: center;
     border-color: black;
     margin: 1%;
-
-    
     animation-name: cambio;
     animation-duration: 7s;
     animation-iteration-count: infinite;
-
 }
 @keyframes cambio {
     0%{color:maroon}
@@ -37,59 +27,21 @@ body{
     50%{color:white}
     75%{color:red}
     100%{color:maroon}
-    
-    
-    
 }
-
-.title {
-    
-   
-    text-align: center;
-    top: 5%;
-    
-    
-	
-    
-}
-
-.register_button a{
-    width: center;
-    position:absolute;
-    overflow:auto;
+a{
     font-family: Snowy Night;
     background-color: #4CAF50;
     border-radius: 50% 50% 50% 50%;
     color: white;
-    padding: 0.7% 0.7%;
-    align-items: center;
-    border: 20%;
-    text-align: center;
     text-decoration:none;
+    padding: 3% 3%;
+    border-style: groove;
+    font-size: 300%;
     display:inline-block ;
-    top:70%;
-    font-size: 260%;
-    left:20%;
-   
-    
     
 }
-.login_button a{
-    width: center;
-    position:absolute;
-    overflow:auto;
-    font-family: Snowy Night;
-    background-color: #4CAF50;
-    border-radius: 50% 50% 50% 50%;
-    color: white;
-    padding: 0.7% 0.7%;
-    align-items: center;
-    border: 20%;
-    text-align: center;
-    text-decoration:none;
-    display:inline-block ;
-    top:70%;
-    right: 20%;
-    font-size: 260%;
-    
-}
+a:hover{
+        border-color: black;
+        color:red;
+        cursor: pointer;
+        background-color: #32AF50;

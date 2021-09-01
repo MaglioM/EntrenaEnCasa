@@ -39,139 +39,95 @@ body{
 }
 
 
-
-.nombre{
-    
-    
-    position:fixed;
-    overflow:auto;
-    width: 20%;
+.listado{
     font-family: Snowy Night;
     background-color: #4CAF50;
-    border-radius: 45% 45% 45% 45%;
+    border-radius: 50% 50% 50% 50%;
     color: white;
-    padding: 0.3% 0.3%;
-    align-items: center;
-    border: 15%;
-    text-align: center;
-    text-decoration: none;
-    left:37%;
-    top:5%;
-    
-    font-size: 120%;
-   
-    
-    
+    outline-style: none;
+    border: none;
+    overflow-y: hidden;
+    text-decoration:none;
+    padding: 3% 3%;
+    border-style: groove;
+    font-size: 150%;
+    display:inline-block ;
+}
+.nombre{
+   font-family: Snowy Night;
+    background-color: #4CAF50;
+    border-radius: 50% 50% 50% 50%;
+    color: white;
+    text-decoration:none;
+    padding: 3% 3%;
+    border-style: groove;
+    font-size: 150%;
+    display:inline-block ;
 }
 .apellido{
-    width: 20%;
-    position:fixed;
-    overflow:auto;
     font-family: Snowy Night;
     background-color: #4CAF50;
-    border-radius: 45% 45% 45% 45%;
+    border-radius: 50% 50% 50% 50%;
     color: white;
-    padding: 0.3% 0.3%;
-    align-items: center;
-    border: 15%;
-    text-align: center;
-    text-decoration: none;
-    
-    left:37%;
-    top:22%;
-    font-size: 120%;
+    text-decoration:none;
+    padding: 3% 3%;
+    border-style: groove;
+    font-size: 150%;
+    display:inline-block ;
     
 }
 .email{
-    width: 20%;
-    position:fixed;
-    overflow:auto;
     font-family: Snowy Night;
     background-color: #4CAF50;
-    border-radius: 45% 45% 45% 45%;
+    border-radius: 50% 50% 50% 50%;
     color: white;
-    padding: 0.3% 0.3%;
-    align-items: center;
-    border: 15%;
-    
-    text-decoration: none;
-    text-align: center;
-    top:39%;
-    left: 37%;
-    font-size: 120%;
-    
+    text-decoration:none;
+    padding: 3% 3%;
+    border-style: groove;
+    font-size: 150%;
+    display:inline-block ;
 }
 .contraseña{
-    width: 20%;
-    position:fixed;
-    overflow:auto;
     font-family: Snowy Night;
     background-color: #4CAF50;
-    border-radius: 45% 45% 45% 45%;
+    border-radius: 50% 50% 50% 50%;
     color: white;
-    padding: 0.3% 0.3%;
-    align-items: center;
-    border: 15%;
-    
-    text-decoration: none;
-    text-align: center;
-    top:56%;
-    left: 37%;
-    font-size: 120%;
-    
+    text-decoration:none;
+    padding: 3% 3%;
+    border-style: groove;
+    font-size: 150%;
+    display:inline-block ;
 }
 .repetir{
-    width: 20%;
-    position:fixed;
-    overflow:auto;
     font-family: Snowy Night;
     background-color: #4CAF50;
-    border-radius: 45% 45% 45% 45%;
+    border-radius: 50% 50% 50% 50%;
     color: white;
-    padding: 0.3% 0.3%;
-    align-items: center;
-    border: 15%;
-    
-    text-decoration: none;
-    text-align: center;
-    top:73%;
-    left: 37%;
-    font-size: 120%;
-    
+    text-decoration:none;
+    padding: 3% 3%;
+    border-style: groove;
+    font-size: 150%;
+    display:inline-block ;
 }
 .boton{
-    width: 20%;
-    position:fixed;
-    overflow:auto;
     font-family: Snowy Night;
     background-color: #4CAF50;
-    border-radius: 45% 45% 45% 45%;
+    border-radius: 50% 50% 50% 50%;
     color: white;
-    padding: 0.3% 0.3%;
-    align-items: center;
-    border: 15%;
-    
-    text-decoration: none;
-    text-align: center;
-    top:89%;
-    left: 37.5%;
-    font-size: 120%;
+    text-decoration:none;
+    padding: 2% 2%;
+    border-style: groove;
+    font-size: 200%;
+    display:inline-block ;
 }
-#error{
-    width: 20%;
-    position:fixed;
-    overflow:auto;
-    font-family: Snowy Night;
+.boton:hover{
+        border-color: black;
+        color:red;
+        cursor: pointer;
+        background-color: #32AF50;
+}
+#error{     
+    font-family: Snowy Night;    
     color: red;
-    border: #4CAF50;
-    
-    padding: 0.7% 0.7%;
-    align-items: center;
-    border: 20%;
-    text-align: center;
-    text-decoration: none;
-    
-    top:-3%;
-    left: 37%;
-    font-size: 100%;
+    text-shadow: -1px -1px 1px white, 1px -1px 1px white, -1px 1px 1px white, 1px 1px 1px white;
 }

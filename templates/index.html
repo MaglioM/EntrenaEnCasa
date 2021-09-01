@@ -2,22 +2,32 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimun-scale=1.0">
-
+    <link rel="stylesheet" href="{{url_for("static", filename="css/bootstrap.min.css")}}">
     <title>Entrena en casa</title>
-    <link rel="icon" href="{{url_for("static", filename="resource/shortcut_icon.png")}}">
+    <link rel="icon" href="{{url_for("static", filename="resource/shortcut_icon.png")}}">    
     <link rel="stylesheet" href="{{url_for("static", filename="css/css.css")}}">
+    
     
 </head>
 <body>
-    <section class="contenedor">
-        <div class="title"><img src="{{url_for("static", filename="resource/title.png")}}"  ></div>
-        <div class="h1"><h1>"Conviertete en un maestro de las artes marciales"</h1></div>
-        <div class="register_button"><a href="register">Crear cuenta</a></div>
-        <div class="login_button"><a href="login">Iniciar sesión</a></div>
-    
-    </section>
-    
-    
+    <div class="container">
+        <div class="row align-items-end">
+            <div class="titulo text-center"><img src="{{url_for("static", filename="resource/title.png")}}" class="img-fluid" ></div>   
+        </div>
+        <div class="row">         
+            <div class="col h2">"Conviertete en un maestro de las artes marciales"</div>
+        </div>
+        <div class="row justify-content-between">
+            <div class="col-12 col-sm-6 text-center"><a class="a" href="register">Crear cuenta</a></div>
+            
+            <div class="col-12 col-sm-6 text-center"><a href="login">Iniciar sesión</a></div>
+            
+            
+        </div>        
+    </div> 
+    <script>src='../static/js/jquery.js'</script>
+    <script>src='../static/js/bootstrap.min.js'</script>
 </body>
 </html>

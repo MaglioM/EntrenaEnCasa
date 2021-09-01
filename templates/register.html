@@ -6,41 +6,63 @@
 
     <title>Entrena en casa</title>
     <link rel="icon" href="{{url_for("static", filename="resource/shortcut_icon.png")}}">
+    <link rel="stylesheet" href="{{url_for("static", filename="css/bootstrap.min.css")}}">
     <link rel="stylesheet" href="{{url_for("static", filename="css/css_register.css")}}">
     </head>
 <body>
- <form action="/registered", method="POST">
-  <div class="nombre">
-    <label for="fname">Nombre:</label><br>
-    <input type="text" id="nombre" name="nombre"><br>
+  
+ <form class="container" action="/registered", method="POST">
+ 
+  <div class="row">
+    <div class="titulo text-center"><img src="{{url_for("static", filename="resource/title.png")}}" class="img-fluid" ></div>   
   </div>
-  <div class="apellido">
-    <label for="lname">Apellido:</label><br>
-    <input type="text" id="apellido" name="apellido"><br>
+  <div class="row">
+    <div class="col-12 h1"><h1>"A un paso de un nuevo comienzo..."</h1></div>
+  </div>
+
+  <div class="row justify-content-around">
+    <div class="col-12 col-lg-4 nombre text-center"><label class="col-12" for="fname">Nombre:<br><input class="col-9 " type="text" id="nombre" name="nombre"></label>    
+  </div>
+  <div class="col-12 col-lg-4 text-center apellido"><label class="col-12" for="lname">Apellido:<br><input class="col-9 " type="text" id="apellido" name="apellido"></label>    
+  </div>
+  <div class="col-12 col-lg-4 email text-center">
+    <label class="col-12"  for="lname">E-Mail:<br><input class="col-9 " type="text" id="email" name="email"></label>   
+  </div>
+  </div>
+  <div class="row justify-content-around">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+      <h3 class="text-center" id="error">{{message}}</h3>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+   </div>
+  <div class="row justify-content-around">
+    <select class="col-6 text-center listado" for="lname" id="usuario" name="usuario" size="2">
+    <option>Alumno</option>      
+    <option>Instructor</option>
+    </select>
   </div>
   
-  <div class="email">
-    <label  for="lname">E-Mail:</label><br>
-    <input type="text" id="email" name="email"><br>
-</div>
-  <div class="contraseña">
-    <label for="lname">Contraseña:</label><br>
-    <input type="text" id="pass" name="pass"><br>
-  </div>
-  <div class="repetir">
-    <label for="lname">Repetir contraseña:</label><br>
-    <input type="text" id="pass2" name="pass2"><br>
+  <div class="row justify-content-between">    
+    <div class="col-12 col-lg-6 text-center contraseña">
+      <label class="col-12" for="lname">Contraseña:<br><input class="col-9" type="text" id="pass" name="pass"></label>    
+    </div>
+    <div class="col-12 col-lg-6 text-center repetir">
+      <label class="col-12" for="lname">Repetir contraseña:<br><input class="col-9" type="text" id="pass2" name="pass2"></label>    
+    </div>
   </div>
  
-  <button class="boton" type="submit">Registrarse</button>
+ 
+  
+  <div class="row justify-content-around"><button class="col-auto text-center boton" type="submit">Registrarse</button></div>
+  
+
+ 
+  
 </form>
 
-{% with messages = get_flashed_messages() %}
-{% if messages %}
-{% for message in messages %}
-	<p id="error">{{message}}</p>
-{% endfor %}
-{% endif %}
-{% endwith %}
+
 </body>
 </html>

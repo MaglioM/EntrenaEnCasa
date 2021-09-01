@@ -1,5 +1,5 @@
 body{
-    
+    margin:1%;
     background-image: url("../resource/background.png");
     background-size: cover;
     
@@ -8,20 +8,18 @@ body{
 
 @font-face {
     font-family: Snowy Night;
-    src: url(../resource/snowy_night.ttf);
+    src: url("../resource/snowy_night.ttf");
   }
 
 
-.h1{
+h1{
    
-   
+    font-size: 200%;
+    padding: 4%;
     font-family: Snowy Night;
-    font-size: 250%;
-    
     color: maroon;
     text-align: center;
     border-color: black;
-    margin: 1%;
     animation-name: cambio;
     animation-duration: 7s;
     animation-iteration-count: infinite;
@@ -41,80 +39,51 @@ body{
 
 
 .pass{
-    
-    width: 20%;
-    position:fixed;
-    overflow:auto;
     font-family: Snowy Night;
     background-color: #4CAF50;
     border-radius: 50% 50% 50% 50%;
     color: white;
-    padding: 0.7% 0.7%;
-    align-items: center;
-    border: 20%;
-    text-align: center;
-    text-decoration: none;
+    text-decoration:none;
+    padding: 3% 3%;
+    border-style: groove;
+    font-size: 150%;
+    display:inline-block ;
     
-    top:30%;
-    right: 25%;
-    font-size: 260%;
-   
     
     
 }
 .email{
-    width: 20%;
-    position:fixed;
-    overflow:auto;
-    font-family: Snowy Night;
+   font-family: Snowy Night;
     background-color: #4CAF50;
     border-radius: 50% 50% 50% 50%;
     color: white;
-    padding: 0.7% 0.7%;
-    align-items: center;
-    border: 20%;
-    text-align: center;
-    text-decoration: none;
-    
-    top:30%;
-    left: 25%;
-    font-size: 260%;
+    text-decoration:none;
+    padding: 3% 3%;
+    border-style: groove;
+    font-size: 150%;
+    display:inline-block ;
     
 }
 .ingresar{
-    width: 20%;
-    position:fixed;
-    overflow:auto;
     font-family: Snowy Night;
     background-color: #4CAF50;
     border-radius: 50% 50% 50% 50%;
     color: white;
-    padding: 0.7% 0.7%;
-    align-items: center;
-    border: 20%;
-    
-    text-decoration: none;
-    text-align: center;
-    top:52%;
-    left: 40%;
-    font-size: 260%;
+    text-decoration:none;
+    padding: 3% 3%;
+    border-style: groove;
+    font-size: 150%;
+    display:inline-block ;
     
 }
-#error{
-    width: 20%;
-    position:fixed;
-    overflow:auto;
-    font-family: Snowy Night;
+a .ingresar:hover{
+        border-color: black;
+        color:red;
+        cursor: pointer;
+        background-color: #32AF50;
+}
+#error{     
+    font-family: Snowy Night;    
     color: red;
-    border: #4CAF50;
-    
-    padding: 0.7% 0.7%;
-    align-items: center;
-    border: 20%;
-    text-align: center;
-    text-decoration: none;
-    
-    top:42%;
-    left: 40%;
-    font-size: 100%;
+    text-shadow: -1px -1px 1px white, 1px -1px 1px white, -1px 1px 1px white, 1px 1px 1px white;
 }

@@ -5,10 +5,10 @@ from flask_mysqldb import MySQL
 app = Flask(__name__)
 
 #conexion a la base
-app.config['MYSQL_HOST'] = '34.135.187.184'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'IFTS16MaccioMaglio'
-app.config['MYSQL_DB'] = 'EntrenaEnCasa'
+app.config['MYSQL_HOST'] = 'becridlgsxtglg0nm3o0-mysql.services.clever-cloud.com'
+app.config['MYSQL_USER'] = 'u7gkzsbwlkpi4dik'
+app.config['MYSQL_PASSWORD'] = 'ymU8g7Y40iZC5xDn4tHx'
+app.config['MYSQL_DB'] = 'becridlgsxtglg0nm3o3'
 mysql = MySQL(app)
 
 #settings
@@ -26,7 +26,7 @@ def register():
 @app.route('/registered', methods=['POST'])
 def registered():
     if request.method == 'POST':
-        if request.form['nombre'] == '' or request.form['apellido'] == '' or request.form['email'] == '' or request.form['pass'] == '' or request.form['pass2'] == '':
+        if request.form['nombre'] == '' or request.form['apellido'] == '' or request.form['email'] == '' or request.form['pass'] == '' or request.form['pass2'] == '' or request.form['usuario'] =='' :
             flash("Todos los campos son obligatorios")
             return redirect(url_for('register'))
         elif not request.form['pass'] == request.form['pass2']:
@@ -36,12 +36,13 @@ def registered():
             flash("Email inválido")
             return redirect(url_for('register'))
         else:
-            nombre = request.form['nombre']
-            apellido = request.form['apellido']
-            email = request.form['email']
-            password = request.form['pass']
-            cursor = mysql.connection.cursor()
-            cursor.execute('INSERT INTO EntrenaEnCasa.Alumnos (Nombre, Apellido, Contraseña, Email) VALUES (%s, %s, %s, %s)',(nombre, apellido, password, email))
+            nombre       = request.form['nombre']
+            apellido     = request.form['apellido']
+            email        = request.form['email']
+            tipo_usuario = request.form['usuario']
+            password     = request.form['pass']
+            cursor       = mysql.connection.cursor()
+            cursor.execute('INSERT INTO EntrenaEnCasa.Alumnos (Nombre, Apellido, Contraseña, Email, Tipo_usuario) VALUES (%s, %s, %s, %s)',(nombre, apellido, password, email, usuario))
             mysql.connection.commit()
             return render_template('index.html')
 
