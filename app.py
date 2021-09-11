@@ -5,7 +5,7 @@ from flask_mysqldb import MySQL
 app = Flask(__name__)
 
 #conexion a la base
-app.config['MYSQL_HOST'] = 'becridlgsxtglg0nm3o0-mysql.services.clever-cloud.com'
+app.config['MYSQL_HOST'] = 'becridlgsxtglg0nm3o3-mysql.services.clever-cloud.com'
 app.config['MYSQL_USER'] = 'u7gkzsbwlkpi4dik'
 app.config['MYSQL_PASSWORD'] = 'ymU8g7Y40iZC5xDn4tHx'
 app.config['MYSQL_DB'] = 'becridlgsxtglg0nm3o3'
