@@ -7,7 +7,7 @@ app = Flask(__name__)
 #conexion a la base
 app.config['MYSQL_HOST'] = 'becridlgsxtglg0nm3o3-mysql.services.clever-cloud.com'
 app.config['MYSQL_USER'] = 'u7gkzsbwlkpi4dik'
-app.config['MYSQL_PASSWORD'] = 'ymU8g7Y40iZC5xDn4tHx'
+app.config['MYSQL_PASSWORD'] = 'ymU8g7Y4OiZC5xDn4tHx'
 app.config['MYSQL_DB'] = 'becridlgsxtglg0nm3o3'
 mysql = MySQL(app)
 
@@ -26,7 +26,7 @@ def register():
 @app.route('/registered', methods=['POST'])
 def registered():
     if request.method == 'POST':
-        if request.form['nombre'] == '' or request.form['apellido'] == '' or request.form['email'] == '' or request.form['pass'] == '' or request.form['pass2'] == '' or request.form['usuario'] =='' :
+        if request.form['nombre'] == '' or request.form['apellido'] == '' or request.form['email'] == '' or request.form['pass'] == '' or request.form['pass2'] == '':
             flash("Todos los campos son obligatorios")
             return redirect(url_for('register'))
         elif not request.form['pass'] == request.form['pass2']:
@@ -36,15 +36,21 @@ def registered():
             flash("Email inválido")
             return redirect(url_for('register'))
         else:
-            nombre       = request.form['nombre']
-            apellido     = request.form['apellido']
-            email        = request.form['email']
-            tipo_usuario = request.form['usuario']
-            password     = request.form['pass']
-            cursor       = mysql.connection.cursor()
-            cursor.execute('INSERT INTO EntrenaEnCasa.Alumnos (Nombre, Apellido, Contraseña, Email, Tipo_usuario) VALUES (%s, %s, %s, %s)',(nombre, apellido, password, email, usuario))
-            mysql.connection.commit()
-            return render_template('index.html')
+            try:
+                nombre       = request.form['nombre']
+                apellido     = request.form['apellido']
+                email        = request.form['email']
+                password     = request.form['pass']
+                cursor       = mysql.connection.cursor()
+                if request.form['usuario'] == "Alumno":
+                    cursor.execute('INSERT INTO becridlgsxtglg0nm3o3.Alumnos (Nombre, Apellido, Contraseña, Email) VALUES (%s, %s, %s, %s)',(nombre, apellido, password, email))
+                elif request.form['usuario'] == "Instructor":
+                    cursor.execute('INSERT INTO becridlgsxtglg0nm3o3.Instructores (Nombre, Apellido, Contraseña, Email) VALUES (%s, %s, %s, %s)',(nombre, apellido, password, email))
+                mysql.connection.commit()
+                return render_template('index.html')
+            except:
+                flash("Ya hay un usuario registrado con ese Email")
+                return redirect(url_for('register'))
 
 @app.route('/login')
 def login():
@@ -55,22 +61,22 @@ def ingresado():
     if request.method == 'POST':
         #saca campos de la base
         cursor = mysql.connection.cursor()
-        cursor.execute('SELECT Email FROM EntrenaEnCasa.Alumnos')
+        cursor.execute('SELECT Email FROM becridlgsxtglg0nm3o3.Alumnos')
         emailsValidos = []
         for result in cursor.fetchall():
             for email in result:
                 emailsValidos.append(email)
-        cursor.execute('SELECT Contraseña FROM EntrenaEnCasa.Alumnos')
+        cursor.execute('SELECT Contraseña FROM becridlgsxtglg0nm3o3.Alumnos')
         passValidas = []
         for result in cursor.fetchall():
             for password in result:
                 passValidas.append(password)
         #validacion
         if request.form['email'] in emailsValidos:
-            cursor.execute('SELECT Contraseña FROM EntrenaEnCasa.Alumnos WHERE Email = '+'"'+(request.form['email']+'"'))
+            cursor.execute('SELECT Contraseña FROM becridlgsxtglg0nm3o3.Alumnos WHERE Email = '+'"'+(request.form['email']+'"'))
             passValida = cursor.fetchall()[0][0]
             if request.form['pass'] == passValida:
-                cursor.execute('SELECT Nombre FROM EntrenaEnCasa.Alumnos WHERE Email = '+'"'+(request.form['email']+'"'))
+                cursor.execute('SELECT Nombre FROM becridlgsxtglg0nm3o3.Alumnos WHERE Email = '+'"'+(request.form['email']+'"'))
                 nombre = cursor.fetchall()[0][0]
                 return render_template('inicio.html',nombre=nombre)
             else:
