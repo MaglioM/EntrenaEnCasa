@@ -11,13 +11,56 @@
 </head>
 <div class="container">
     <div class="row">
-        <h1 class="col bienvenida" >Bienvenido {{nombre}}<br>A </h1>
+        <h1 class="col bienvenida" >Bienvenid@ {{nombre}}<br>A </h1>
     </div>    
     <div class="row align-items-end">
      <div class="col text-center"><img src="{{url_for("static", filename="resource/title.png")}}" class="img-fluid" ></div>   
     </div>
+    <div class='row'>
+        <div class='col-4'>
+            <div class='div text-center' href="register">
+                <a href="boxeo">
+                    <h1>Boxeo</h1>
+                    <video width="320" height="240" controls>
+                        <source src="{{url_for("static", filename="resource/boxeo.mp4")}}" type="video/mp4">
+                    
+                    Your browser does not support the video tag.
+                    </video>
+                    <p>Aprende todos los movimientos del boxeo y conviertete en un boxeador.</p>
+                </a>
+                </div>
+            
+        </div>
+        <div class='col-4'>
+            <div class='div text-center'>
+                <a href="kick-boxing">
+                    <h1>Kick Boxing</h1>
+                    <video width="320" height="240" controls>
+                        <source src="{{url_for("static", filename="resource/kickboxing.mp4")}}" type="video/mp4">
+                    
+                        Your browser does not support the video tag.
+                    </video>
+                    <p>Aprende todos los movimientos del Kick Boxing y conviertete en un kick-boxer.</p>
+                </a>
+            </div>
+        </div>
+        <div class='col-4'>
+            <div class='div text-center'>
+                <a href="muay-thai">
+                    <h1>Muay Thai</h1>
+                    <video width="320" height="240" controls>
+                        <source src="{{url_for("static", filename="resource/muay-thai.mp4")}}" type="video/mp4">
+                    
+                        Your browser does not support the video tag.
+                    </video>
+                    <p>Aprende todos los movimientos del Muay Thai y conviertete en un luchador del Muay Thai.</p>
+                
+                </a>                
+            </div>
+        </div>
+    </div>
     <div class="row">
-        <h1 class="col disponible">Proximamente Disponible</h1>
+        <h1 class="col disponible">Proximamente Disponible MMA</h1>
     </div>
 
 </div>

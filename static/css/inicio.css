@@ -2,7 +2,9 @@ body{
     background-image: url("../resource/background.png");
     background-size: cover;
 }
-
+a{
+    text-decoration: none;
+}
 @font-face {
     font-family: Snowy Night;
     src: url(../resource/snowy_night.ttf);
@@ -47,4 +49,18 @@ body{
     animation-duration: 7s;
     animation-iteration-count: infinite;
     text-align: center;
+}
+h1{
+    font-family: Snowy Night;
+    font-size: 250%;
+    color: rgb(89, 17, 161);
+    border-color: black;
+    margin: 1%;   
+    text-align: center;
+}
+p{
+    color: white;
+}
+.div{
+    background-color: rgba(0, 0, 0, 0.5)
 }
