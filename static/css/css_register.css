@@ -14,10 +14,9 @@ body{
 
 .h1{
    
-   
+    text-decoration: none;
     font-family: Snowy Night;
-    font-size: 250%;
-    
+    font-size: 250%;    
     color: maroon;
     text-align: center;
     border-color: black;

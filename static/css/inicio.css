@@ -7,18 +7,10 @@ body{
     font-family: Snowy Night;
     src: url(../resource/snowy_night.ttf);
   }
-  .img{
-     
-    text-align: center;
-    
-    
-    top: 5%;
-  }
 .disponible{
     width: 100%;
     height: 100%;
-    position:fixed;
-    overflow:visible;
+    
     inline-size: center;
     font-family: Snowy Night;
     font-size: 250%;
@@ -49,10 +41,10 @@ body{
     font-family: Snowy Night;
     font-size: 250%;
     color: maroon;
-    text-align: center;
     border-color: black;
     margin: 1%;
     animation-name: cambio;
     animation-duration: 7s;
     animation-iteration-count: infinite;
+    text-align: center;
 }
