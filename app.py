@@ -19,6 +19,19 @@ app.secret_key='secretkey'
 def index():
     return render_template('index.html')
 
+@app.route('/boxeo')
+def boxeo():
+    return render_template('boxeo.html')
+
+@app.route('/kick-boxing')
+def kickboxing():
+    return render_template('kick-boxing.html')
+
+@app.route('/muay-thai')
+def muaythai():
+    return render_template('muay-thai.html')
+
+
 @app.route('/register')
 def register():
     return render_template('register.html')
