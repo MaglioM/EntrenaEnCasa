@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimun-scale=1.0">
@@ -10,35 +10,14 @@
     
 </head>
 <div class="container">
-    <div class="row">
-        <h1 class="col bienvenida" >Bienvenid@ {{nombre}}<br>A </h1>
-    </div>    
+    
     <div class="row align-items-end">
      <div class="col text-center"><img src="{{url_for("static", filename="resource/title.png")}}" class="img-fluid" ></div>   
     </div>
-
-
-
-    {%for curso in cursos%}
-    <div class='row'>
-        <div class='col-4'>
-            <div class='div text-center' href="register">
-		    <a href="curso/{{curso[0]}}">
-			<h1>{{curso[1]}}</h1>
-                    <video width="320" height="240" controls>
-			    <source src="{{curso[3]}}" type="video/mp4">
-                    
-                    Your browser does not support the video tag.
-                    </video>
-		    <p>{{curso[2]}}</p>
-                </a>
-                </div> 
-        </div>
-    {%endfor%}
-
+        
     </div>
     <div class="row">
-        <h1 class="col disponible">Proximamente Disponible MMA</h1>
+	    <h1 class="col disponible">Proximamente {{curso}} Disponible</h1>
     </div>
 
 </div>
@@ -50,3 +29,4 @@
     
 </body>
 </html>
+
