@@ -30,7 +30,9 @@ def curso(id):
     cursor = mysql.connection.cursor()
     cursor.execute('SELECT Nombre FROM '+base+'.Curso WHERE IdCurso='+id)
     curso = cursor.fetchall()[0][0]
-    return render_template('curso.html',curso=curso)
+    cursor.execute('SELECT * FROM '+base+'.Leccion WHERE IdCurso='+id)
+    lecciones= cursor.fetchall()
+    return render_template('curso.html',curso=curso,lecciones=lecciones)
 
 
 @app.route('/register')
