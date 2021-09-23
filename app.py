@@ -24,17 +24,6 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/curso/<id>')
-def curso(id):    
-    session['idCurso']=id
-    cursor = mysql.connection.cursor()
-    cursor.execute('SELECT Nombre FROM '+base+'.Curso WHERE IdCurso='+id)
-    curso = cursor.fetchall()[0][0]
-    cursor.execute('SELECT * FROM '+base+'.Leccion WHERE IdCurso='+id)
-    lecciones= cursor.fetchall()
-    return render_template('curso.html',curso=curso,lecciones=lecciones)
-
-
 @app.route('/register')
 def register():
     return render_template('register.html')
@@ -57,14 +46,23 @@ def registered():
                 apellido     = request.form['apellido']
                 email        = request.form['email']
                 password     = request.form['pass']
-                cursor       = mysql.connection.cursor()
+                cursor = mysql.connection.cursor()
                 if request.form['usuario'] == "Alumno":
-                    cursor.execute('INSERT INTO '+base+'.Alumnos (Nombre, Apellido, Contraseña, Email) VALUES (%s, %s, %s, %s)',(nombre, apellido, password, email))
+                    cursor.execute('INSERT INTO '+base+'.Alumnos (Nombre, Apellido, Contraseña, Email) VALUES ("{}", "{}", "{}", "{}")'.format(nombre, apellido, password, email))
+                    mysql.connection.commit()
+                    cursor.execute('SELECT IdAlumno FROM '+base+'.Alumnos WHERE Email = "{}"'.format(email))
+                    idAlumno=cursor.fetchall()[0][0]
+                    cursor.execute('SELECT IdCurso FROM '+base+'.Curso')
+                    cursos=cursor.fetchall()
+                    for curso in cursos:
+                        cursor.execute('INSERT INTO '+base+'.Alumno_Curso (IdAlumno, IdCurso) VALUES ({},{})'.format(idAlumno,curso[0]))
+                        mysql.connection.commit()
                 elif request.form['usuario'] == "Instructor":
-                    cursor.execute('INSERT INTO '+base+'.Instructores (Nombre, Apellido, Contraseña, Email) VALUES (%s, %s, %s, %s)',(nombre, apellido, password, email))
-                mysql.connection.commit()
+                    cursor.execute('INSERT INTO '+base+'.Instructores (Nombre, Apellido, Contraseña, Email) VALUES ("{}", "{}", "{}", "{}")'.format(nombre, apellido, password, email))
+                    mysql.connection.commit()
                 return render_template('index.html')
-            except:
+            except Exception as e:
+                print("Este fue el error:{}".format(e))
                 flash("Ya hay un usuario registrado con ese Email")
                 return redirect(url_for('register'))
 
@@ -106,6 +104,18 @@ def ingresado():
         else:
             flash("Usuario no registrado")
             return redirect(url_for('login'))
+
+
+@app.route('/curso/<id>')
+def curso(id):    
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT Nombre FROM '+base+'.Curso WHERE IdCurso={}'.format(session['idCurso']))
+    curso = cursor.fetchall()[0][0]
+    cursor.execute('SELECT Nivel FROM '+base+'.Alumno_Curso WHERE IdCurso={} AND IdAlumno={}'.format(session['idCurso'],session['idAlumno']))
+    nivel= cursor.fetchall()[0][0]
+    cursor.execute('SELECT * FROM '+base+'.Leccion WHERE IdCurso={}'.format(session['idCurso']))
+    lecciones=cursor.fetchall()
+    return render_template('curso.html',curso=curso,nivel=nivel,lecciones=lecciones)
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -2,10 +2,10 @@
 <html lang="es">
 <body>
 	<h1> Lecciones disponibles para tu nivel de {{curso}} </h1>
-	{%for leccion in lecciones%} 
+	{%for leccion in range(nivel)%} 
 
-	<p>Lección {{leccion[2]}}</p>
-	<p>{{leccion[3]}}</p>
+	<p>Lección {{leccion+1}}</p>
+	<p>{{lecciones[leccion][3]}}</p>
 
 	{%endfor%}
 </body>
