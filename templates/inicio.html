@@ -1,52 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimun-scale=1.0">
-    <link rel="stylesheet" href="{{url_for("static", filename="css/bootstrap.min.css")}}">
-    <title>Entrena en casa</title>
-    <link rel="icon" href="{{url_for("static", filename="resource/shortcut_icon.png")}}">
-    <link rel="stylesheet" href="{{url_for("static", filename="css/inicio.css")}}">
-    
-</head>
-<div class="container">
-    <div class="row">
-        <h1 class="col bienvenida" >Bienvenid@ {{nombre}}<br>A </h1>
-    </div>    
-    <div class="row align-items-end">
-     <div class="col text-center"><img src="{{url_for("static", filename="resource/title.png")}}" class="img-fluid" ></div>   
-    </div>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimun-scale=1.0">
+        <link rel="stylesheet" href="{{url_for("static", filename="css/bootstrap.min.css")}}">
+        <title>Entrena en casa</title>
+        <link rel="icon" href="{{url_for("static", filename="resource/shortcut_icon.png")}}">
+        <link rel="stylesheet" href="{{url_for("static", filename="css/inicio.css")}}">
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <h1 class="col bienvenida" >Bienvenid@ {{nombre}}<br>A </h1>
+            </div>    
+            <div class="row align-items-end">
+                <div class="col text-center">
+                    <img src="{{url_for("static", filename="resource/title.png")}}" class="img-fluid" >
+                </div>   
+            </div>
+            <div class='row'>
+                {%for curso in cursos%}
+                    <div class='col-xl-4 col-lg-6 col-md-12 div text-center'>
+                        <a href="curso/{{curso[0]}}">
+                            <div href="curso/{{curso[0]}}">
+                                <h1>{{curso[1]}}</h1>
+                                <iframe width="320" height="240" src="{{curso[3]}}" title="YouTube video player" 
+                                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <p>{{curso[2]}}</p>
+                            </div>
+                        </a> 
+                    </div>
+                {%endfor%}
+            </div>
+            <div class="row">
+                <h1 class="col disponible">Proximamente Disponible MMA</h1>
+            </div>
 
-
-
-    {%for curso in cursos%}
-    <div class='row'>
-        <div class='col-4'>
-            <div class='div text-center' href="register">
-		    <a href="curso/{{curso[0]}}">
-			<h1>{{curso[1]}}</h1>
-                    <video width="320" height="240" controls>
-			    <source src="{{curso[3]}}" type="video/mp4">
-                    
-                    Your browser does not support the video tag.
-                    </video>
-		    <p>{{curso[2]}}</p>
-                </a>
-                </div> 
         </div>
-    {%endfor%}
-
-    </div>
-    <div class="row">
-        <h1 class="col disponible">Proximamente Disponible MMA</h1>
-    </div>
-
-</div>
-
-<script>src='../static/js/jquery.js'</script>
-<script>src='../static/js/bootstrap.min.js'</script>
-</head>
-<body>
-    
-</body>
+        <script>src='../static/js/jquery.js'</script>
+        <script>src='../static/js/bootstrap.min.js'</script>
+    </body>
 </html>

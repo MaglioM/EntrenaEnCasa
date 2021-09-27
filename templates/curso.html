@@ -1,13 +1,37 @@
 <!DOCTYPE html>
 <html lang="es">
-<body>
-	<h1> Lecciones disponibles para tu nivel de {{curso}} </h1>
-	{%for leccion in range(nivel)%} 
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimun-scale=1.0">
+		<link rel="stylesheet" href="{{url_for("static", filename="css/bootstrap.min.css")}}">
+		<title>Entrena en casa</title>
+		<link rel="icon" href="{{url_for("static", filename="resource/shortcut_icon.png")}}">
+		<link rel="stylesheet" href="{{url_for("static", filename="css/css_1.css")}}">
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<h1 class="bienvenida col-12"> Lecciones disponibles para tu nivel de {{curso}}</h1>
+				<h2 class="nivel col-12"> Nivel Actual: {{nivel}} </h2>
+			</div>
+			{%for leccion in range(nivel)%}
+			<div class="row justify-content-center">
+				<a class="col-6 text-center" href="../templates/Boxeo.html">
+					<div class="row">
+						<div class="col-2">
+							<h5>Lección {{leccion+1}}</h5>
+						</div>
+						<div class="col-10">
+							<h5>{{lecciones[leccion][3]}}</h5>
+						</div>
+					</div>
+					
+				</a>				
+			</div>
+			{%endfor%}
 
-	<p>Lección {{leccion+1}}</p>
-	<p>{{lecciones[leccion][3]}}</p>
-
-	{%endfor%}
-</body>
+		
+		</div>
+	</body>
 </html>
 
