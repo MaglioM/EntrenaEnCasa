@@ -108,6 +108,7 @@ def ingresado():
 
 @app.route('/curso/<id>')
 def curso(id):    
+    session['idCurso'] = id
     cursor = mysql.connection.cursor()
     cursor.execute('SELECT Nombre FROM '+base+'.Curso WHERE IdCurso={}'.format(session['idCurso']))
     curso = cursor.fetchall()[0][0]
