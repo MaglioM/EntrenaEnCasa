@@ -23,6 +23,9 @@ base='becridlgsxtglg0nm3o3'
 def index():
     return render_template('index.html')
 
+@app.route('/proximamente')
+def proximamente():
+    return render_template('proximamente.html')
 
 @app.route('/register')
 def register():
