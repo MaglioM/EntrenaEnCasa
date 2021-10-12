@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimun-scale=1.0">
+    <link rel="stylesheet" href="{{url_for("static", filename="css/bootstrap.min.css")}}">
+    <title>Entrena en casa</title>
+    <link rel="icon" href="{{url_for("static", filename="resource/shortcut_icon.png")}}">
+    <link rel="stylesheet" href="{{url_for("static", filename="css/inicio.css")}}">
+    
+</head>
+<div class="container">
+    
+    <div class="row align-items-end">
+     <div class="col text-center"><img src="{{url_for("static", filename="resource/title.png")}}" class="img-fluid" ></div>   
+    </div>
+        
+    </div>
+    <div class="row">
+        <h1 class="col disponible">Proximamente Disponible</h1>
+        <h2>{{video}}</h2>
+    </div>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Upload">
+    </form>
+
+</div>
+
+<script>src='../static/js/jquery.js'</script>
+<script>src='../static/js/bootstrap.min.js'</script>
+</head>
+<body>
+    
+</body>
+</html>
