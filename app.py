@@ -131,12 +131,13 @@ def curso(id):
     lecciones=cursor.fetchall()
     return render_template('curso.html',curso=curso,nivel=nivel,lecciones=lecciones)
 
-@app.route('/examen/<curso>/<id>', methods=["GET", "POST"])
-def examen(curso, id):
-    session['idCurso'] = id
+@app.route('/examen/<curso>/<nivel>', methods=["GET", "POST"])
+def examen(curso, nivel):
     cursor = mysql.connection.cursor()
-    cursor.execute('SELECT urlVideo FROM '+base+'.Leccion WHERE idCurso={}'.format(session['idCurso']))
-    video = cursor.fetchall()[0][0]
+    cursor.execute('SELECT Descripcion, urlVideo FROM '+base+'.Leccion WHERE idCurso={} AND Nivel={}'.format(session['idCurso'],nivel))
+    infoCurso = cursor.fetchall()[0]
+    descripcion = infoCurso[0]
+    video = infoCurso[1]
     if request.method == "POST":
         if not "file" in request.files:
             return "No file part in the form."
@@ -148,7 +149,7 @@ def examen(curso, id):
             f.save(os.path.join(UPLOAD_FOLDER, filename))
             return "cargado correctamente"
         return "File not allowed."
-    return render_template('examen.html', video=video)
+    return render_template('leccion.html', video=video, descripcion=descripcion)
 
 if __name__ == "__main__":
     app.run(debug=True)
