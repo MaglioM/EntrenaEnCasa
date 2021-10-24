@@ -3,7 +3,39 @@ body{
     background-size: cover;
 }
 a{
-    text-decoration: none;
+    text-decoration:none;
+}
+.examen{
+    font-family: Snowy Night;
+    color: #B8860B;
+    text-align: center;
+    border-color: black;
+    animation-name: examen;
+    animation-duration: 7s;
+    animation-iteration-count: infinite;
+}
+@keyframes examen{
+    0%{color:rgb(218,165,32)}
+    20%{color:rgb(255,215,0)}
+    50%{color:rgb(212,175,55)}
+    75%{color:rgb(207,181,59)}
+    100%{color:rgb(197,179,88)}
+}
+.instructor{
+    border-radius: 20px;
+    font-family: Snowy Night;
+    background-color: #4CAF50;
+    color: white;
+    padding:0.5%;
+    text-decoration:none;
+    border-style: groove;
+    border-color: #B8860B;
+}
+.instructor:hover{
+        border-color: rgb(218,165,32);
+        color:rgb(212, 0, 0);
+        cursor: pointer;
+        background-color: rgb(197,179,88);
 }
 @font-face {
     font-family: Snowy Night;

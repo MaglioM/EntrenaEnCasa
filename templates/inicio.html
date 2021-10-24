@@ -32,6 +32,27 @@
                     </div>
                 {%endfor%}
             </div>
+            {% if examenes %}
+            {% set evaluacion='Examenes' %}
+            <h1 class="examen">{{evaluacion}}:</h1>
+            {%for examen in examenes%}                
+                <div class="row justify-content-center">
+                    <a class="col-6 text-center instructor" href="">
+                        <div class="row">
+                            <div class="col-4">                                
+                                <h5>Alumno: {{alumnos[examen[0]-1][0]}}</h5>                                
+                            </div>
+                            <div class="col-4">                                
+                                <h5>Curso: {{nombreCursos[examen[0]-1][0]}}</h5>                                
+                            </div>
+                            <div class="col-4">                                
+                                <h5>Nivel: {{niveles[examen[0]-1][0]}}</h5>  
+                            </div>
+                        </div>
+                    </a>			
+                </div>                
+                {%endfor%}
+                {% endif %}
             <div class="row">
                 <h1 class="col disponible">Proximamente Disponible MMA</h1>
             </div>

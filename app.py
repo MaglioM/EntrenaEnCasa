@@ -86,37 +86,80 @@ def login():
 @app.route('/ingresado', methods=['POST'])
 def ingresado():
     if request.method == 'POST':
-        #validación de login
-        cursor = mysql.connection.cursor()
-        cursor.execute('SELECT Email FROM '+base+'.Alumnos')
-        emailsValidos = []
-        for result in cursor.fetchall():
-            for email in result:
-                emailsValidos.append(email)
-        cursor.execute('SELECT Contraseña FROM '+base+'.Alumnos')
-        passValidas = []
-        for result in cursor.fetchall():
-            for password in result:
-                passValidas.append(password)
-        if request.form['email'] in emailsValidos:
-            cursor.execute('SELECT Contraseña FROM '+base+'.Alumnos WHERE Email = '+'"'+(request.form['email']+'"'))
-            passValida = cursor.fetchall()[0][0]
-            if request.form['pass'] == passValida:
-                #Buscar los cursos en la base para mostrar en pantalla
-                cursor.execute('SELECT * FROM '+base+'.Curso')
-                cursos = cursor.fetchall()
-                cursor.execute('SELECT Nombre, IdAlumno FROM '+base+'.Alumnos WHERE Email = '+'"'+(request.form['email']+'"'))
-                resultados=cursor.fetchall()
-                nombre = resultados[0][0]
-                #Guardar en la sesión al alumno y dirigirlo al inicio
-                session['idAlumno'] = resultados[0][1]
-                return render_template('inicio.html',nombre=nombre,cursos=cursos)
+
+        #validación de login instructor
+        if request.form['usuario'] == "Instructor":
+            cursor = mysql.connection.cursor()
+            cursor.execute('SELECT Email FROM '+base+'.Instructores')
+            emailsValidos = []
+            for result in cursor.fetchall():
+                for email in result:
+                    emailsValidos.append(email)
+            cursor.execute('SELECT Contraseña FROM '+base+'.Instructores')
+            passValidas = []
+            for result in cursor.fetchall():
+                for password in result:
+                    passValidas.append(password)
+            if request.form['email'] in emailsValidos:
+                cursor.execute('SELECT Contraseña FROM '+base+'.Instructores WHERE Email = '+'"'+(request.form['email']+'"'))
+                passValida = cursor.fetchall()[0][0]
+                if request.form['pass'] == passValida:
+                    #Buscar los examenes en la base para mostrar en pantalla
+                    cursor.execute('SELECT * FROM '+base+'.Examen where Aprobado ="P"')
+                    examenes = cursor.fetchall()
+                    cursor.execute('SELECT Nombre, IdAlumno FROM '+base+'.Alumnos INER JOIN '+base+'.Examen USING(idAlumno)')
+                    alumnos = cursor.fetchall()
+                    cursor.execute('SELECT Nombre, idCurso FROM '+base+'.Curso INER JOIN '+base+'.Examen USING(idCurso)')
+                    nombreCursos = cursor.fetchall()
+                    cursor.execute('SELECT Nivel, idLeccion FROM '+base+'.Leccion INER JOIN '+base+'.Examen USING(idLeccion)')
+                    niveles = cursor.fetchall()
+                    cursor.execute('SELECT Nombre, IdInstructor FROM '+base+'.Instructores WHERE Email = '+'"'+(request.form['email']+'"'))
+                    resultados=cursor.fetchall()
+                    nombre = resultados[0][0]
+                    #Guardar en la sesión al instrructor y dirigirlo al inicio
+                    session['idInstructor'] = resultados[0][1]
+                    return render_template('inicio.html', nombre=nombre, examenes=examenes, alumnos=alumnos, nombreCursos=nombreCursos, niveles=niveles)
+                else:
+                    flash("Usuario no registrado")
+                    return redirect(url_for('login'))
             else:
                 flash("Usuario no registrado")
                 return redirect(url_for('login'))
-        else:
-            flash("Usuario no registrado")
-            return redirect(url_for('login'))
+#INSERT INTO Examen ( idLeccion, idAlumno, idInstructor, Aprobado, urlVideo, intentos, idCurso) VALUES ( 1, 11, 2, 'P', 'dasdsa', 0, 2)
+#ALTER TABLE Examen AUTO_INCREMENT=6
+        #validación de login alumno
+        if request.form['usuario'] == "Alumno":
+            cursor = mysql.connection.cursor()
+            cursor.execute('SELECT Email FROM '+base+'.Alumnos')
+            emailsValidos = []
+            for result in cursor.fetchall():
+                for email in result:
+                    emailsValidos.append(email)
+            cursor.execute('SELECT Contraseña FROM '+base+'.Alumnos')
+            passValidas = []
+            for result in cursor.fetchall():
+                for password in result:
+                    passValidas.append(password)
+            if request.form['email'] in emailsValidos:
+                cursor.execute('SELECT Contraseña FROM '+base+'.Alumnos WHERE Email = '+'"'+(request.form['email']+'"'))
+                passValida = cursor.fetchall()[0][0]
+                if request.form['pass'] == passValida:
+                    #Buscar los cursos en la base para mostrar en pantalla
+                    cursor.execute('SELECT * FROM '+base+'.Curso')
+                    cursos = cursor.fetchall()
+                    cursor.execute('SELECT Nombre, IdAlumno FROM '+base+'.Alumnos WHERE Email = '+'"'+(request.form['email']+'"'))
+                    resultados=cursor.fetchall()
+                    nombre = resultados[0][0]
+                    #Guardar en la sesión al alumno y dirigirlo al inicio
+                    session['idAlumno'] = resultados[0][1]
+                    return render_template('inicio.html',nombre=nombre,cursos=cursos)
+                else:
+                    flash("Usuario no registrado")
+                    return redirect(url_for('login'))
+            else:
+                flash("Usuario no registrado")
+                return redirect(url_for('login'))
+
 
 
 @app.route('/curso/<id>')

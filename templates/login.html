@@ -25,6 +25,13 @@
 
                 <div class="col-12 col-sm-6 pass text-center"> <label class="col-6 col-sm-6 text-center " for="lname">Contraseña:<br><input class="col-12 col-sm-12 text-center " type="password" id="pass" name="pass"></label>
                 </div>
+                
+                <div class="row justify-content-around">
+                <select class="col-6 text-center listado" for="lname" id="usuario" name="usuario" size="2">
+                <option selected value="Alumno">Alumno</option>      
+                <option value="Instructor">Instructor</option>     
+                </select>  
+                </div>
 
                 <div class="row justify-content-around">
                     {% with messages = get_flashed_messages() %}
