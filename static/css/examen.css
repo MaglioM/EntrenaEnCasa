@@ -1,0 +1,87 @@
+body{
+    background-image: url("../resource/background.png");
+    background-size: cover;
+}
+a{
+    text-decoration:none;
+}
+.examen{
+    font-family: Snowy Night;
+    color: #B8860B;
+    text-align: center;
+    border-color: black;
+    animation-name: examen;
+    animation-duration: 7s;
+    animation-iteration-count: infinite;
+}
+@keyframes examen{
+    0%{color:rgb(218,165,32)}
+    20%{color:rgb(255,215,0)}
+    50%{color:rgb(212,175,55)}
+    75%{color:rgb(207,181,59)}
+    100%{color:rgb(197,179,88)}
+}
+.instructor{    
+    font-family: Snowy Night;  
+    padding:0.5%;
+    text-decoration:none;
+    color:red;
+    
+}
+@font-face {
+    font-family: Snowy Night;
+    src: url(../resource/snowy_night.ttf);
+  }
+.disponible{
+    width: 100%;
+    height: 100%;
+    
+    inline-size: center;
+    font-family: Snowy Night;
+    font-size: 250%;
+    left: 0%;
+    top:60%;
+    color: maroon;
+    text-align: center;
+    border-color: black;
+    margin: 1%;
+    animation-name: cambio;
+    animation-duration: 7s;
+    animation-iteration-count: infinite;
+
+}
+
+
+@keyframes cambio {
+    0%{color:maroon}
+    20%{color:green}
+    50%{color:white}
+    75%{color:red}
+    100%{color:maroon}
+    
+    
+    
+}
+.bienvenida{
+    font-family: Snowy Night;
+    font-size: 250%;
+    color: maroon;
+    border-color: black;
+    margin: 1%;
+    animation-name: cambio;
+    animation-duration: 7s;
+    animation-iteration-count: infinite;
+    text-align: center;
+}
+h1{
+    font-family: Snowy Night;
+    font-size: 250%;
+    border-color: black;
+    margin: 1%;   
+    text-align: center;
+}
+p{
+    color: white;
+    font-family: Snowy Night;
+    font-size: 250%;
+}
