@@ -88,6 +88,7 @@ def login():
 def ingresado():    
         #validación de login instructor
         if request.form['usuario'] == "Instructor":
+            session['pantalla']= "Instructor"
             cursor = mysql.connection.cursor()
             cursor.execute('SELECT Email FROM '+base+'.Instructores')
             emailsValidos = []
@@ -131,6 +132,7 @@ def ingresado():
 #ALTER TABLE Examen AUTO_INCREMENT=6
         #validación de login alumno
         if request.form['usuario'] == "Alumno":
+            session['pantalla']= "Alumno"
             cursor = mysql.connection.cursor()
             cursor.execute('SELECT Email FROM '+base+'.Alumnos')
             emailsValidos = []
@@ -177,17 +179,16 @@ def curso(id):
     return render_template('curso.html',curso=curso,nivel=nivel,lecciones=lecciones)
 
 @app.route('/examen/<curso>/<nivel>', methods=["GET", "POST"])
-def examen(curso, nivel):    
-    cursor = mysql.connection.cursor() 
-    cursor.execute('SELECT Nombre FROM '+base+'.Alumnos')
-    row=cursor.fetchall()
-    if row == None:
-        pantalla='instructor'
-        flash(row)         
+def examen(curso, nivel): 
+    if session['pantalla'] == "Instructor":
+        pantalla='instructor'      
     else:
-        pantalla='alumno' 
-        flash(row)    
+        pantalla='alumno'       
+
     
+
+        
+    cursor = mysql.connection.cursor()
     cursor.execute('SELECT Descripcion, urlVideo, idLeccion FROM '+base+'.Leccion WHERE idCurso={} AND Nivel={}'.format(session['idCurso'],nivel))
     infoCurso = cursor.fetchall()[0]
     descripcion = infoCurso[0]
@@ -204,14 +205,7 @@ def examen(curso, nivel):
         estado= examen[0]
         examen= examen[1]
         nota= examen[3]
-    
-    #if request.form['evaluacion'] == "Aprobado":
-
-        #cursor.execute('UPDATE '+base+'.Examen set Aprobado = 'A' WHERE idAlumno={} AND idLeccion={} AND idCurso'.format(session['idAlumno'], leccion, session['idCurso']))
-        #mysql.connection.commit()
-        #cursor.execute('INSERT INTO '+base+'.Alumno_Curso (idAlumno, idCurso, nivel) VALUES ("{}", "{}", "{}")'.format(session['idAlumno'], session['idCurso'], (nivel+1)))
-        #mysql.connection.commit()
-
+     
     archivo = '{}{}{}.jpg'.format(session['idAlumno'], session['idCurso'], leccion )
     if request.method == "POST":
         if not "file" in request.files:
