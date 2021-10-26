@@ -173,40 +173,39 @@ def curso(id):
     cursor.execute('SELECT Nombre FROM '+base+'.Curso WHERE IdCurso={}'.format(session['idCurso']))
     curso = cursor.fetchall()[0][0]
     cursor.execute('SELECT Nivel FROM '+base+'.Alumno_Curso WHERE IdCurso={} AND IdAlumno={}'.format(session['idCurso'],session['idAlumno']))
-    nivel= cursor.fetchall()[0][0]    
+    nivel= cursor.fetchall()[0][0]
+    cursor.execute('SELECT idAlumno FROM '+base+'.Alumno_Curso WHERE IdCurso={} AND IdAlumno={}'.format(session['idCurso'],session['idAlumno']))
+    idAlumno= cursor.fetchall()[0][0]       
     cursor.execute('SELECT * FROM '+base+'.Leccion WHERE IdCurso={}'.format(session['idCurso']))
     lecciones=cursor.fetchall()
-    return render_template('curso.html',curso=curso,nivel=nivel,lecciones=lecciones)
+    return render_template('curso.html', curso=curso, nivel=nivel, lecciones=lecciones, idAlumno=idAlumno)
 
-@app.route('/examen/<curso>/<nivel>', methods=["GET", "POST"])
-def examen(curso, nivel): 
+@app.route('/examen/<curso>/<nivel>/<idAlumno>', methods=["GET", "POST"])
+def examen(curso, nivel, idAlumno): 
     if session['pantalla'] == "Instructor":
         pantalla='instructor'      
     else:
-        pantalla='alumno'       
+        pantalla='alumno'    
 
-    
-
-        
-    cursor = mysql.connection.cursor()
-    cursor.execute('SELECT Descripcion, urlVideo, idLeccion FROM '+base+'.Leccion WHERE idCurso={} AND Nivel={}'.format(session['idCurso'],nivel))
+    cursor = mysql.connection.cursor()    
+    cursor.execute('SELECT Descripcion, urlVideo, idLeccion FROM '+base+'.Leccion WHERE idCurso={} AND Nivel={}'.format(session['idCurso'], nivel))
     infoCurso = cursor.fetchall()[0]
     descripcion = infoCurso[0]
     video = infoCurso[1]
     leccion= infoCurso[2]
-    cursor.execute('SELECT Aprobado FROM '+base+'.Examen WHERE idAlumno={} AND idLeccion={} AND idCurso'.format(session['idAlumno'], leccion, session['idCurso']))
+    cursor.execute('SELECT Aprobado FROM '+base+'.Examen WHERE idAlumno={} AND idLeccion={} AND idCurso={}'.format(idAlumno, leccion, session['idCurso']))
     if cursor.fetchall() == ():
         estado='' 
-        nota=''
+        #nota=''
         examen=''    
     else:
-        cursor.execute('SELECT Aprobado, urlVideo, nota FROM '+base+'.Examen WHERE idAlumno={} AND idLeccion={} AND idCurso'.format(session['idAlumno'], leccion, session['idCurso']))
+        cursor.execute('SELECT Aprobado, urlVideo FROM '+base+'.Examen WHERE idAlumno={} AND idLeccion={} AND idCurso'.format(idAlumno, leccion, session['idCurso']))
         examen= cursor.fetchall()[0]
         estado= examen[0]
         examen= examen[1]
-        nota= examen[3]
+        #nota= examen[3]
      
-    archivo = '{}{}{}.jpg'.format(session['idAlumno'], session['idCurso'], leccion )
+    archivo = '{}{}{}.jpg'.format(idAlumno, session['idCurso'], leccion )
     if request.method == "POST":
         if not "file" in request.files:
             flash("No hay ningun elemento de archivo!")
@@ -222,10 +221,10 @@ def examen(curso, nivel):
     if request.method == 'POST':
         if request.form['subida']=='Upload':
             cursor = mysql.connection.cursor()
-            cursor.execute('INSERT INTO '+base+'.Examen (idLeccion, idAlumno, Aprobado, urlVideo, idCurso) VALUES ("{}", "{}", "{}", "{}", "{}")'.format(leccion, session['idAlumno'], 'P', archivo, session['idCurso']))
+            cursor.execute('INSERT INTO '+base+'.Examen (idLeccion, idAlumno, Aprobado, urlVideo, idCurso) VALUES ("{}", "{}", "{}", "{}", "{}")'.format(leccion, idAlumno, 'P', archivo, session['idCurso']))
             mysql.connection.commit()
-            return render_template('leccion.html', video=video, descripcion=descripcion, estado=estado, examen=examen, nota=nota, pantalla=pantalla)
-    return render_template('leccion.html', video=video, descripcion=descripcion, estado=estado, examen=examen, nota=nota, pantalla=pantalla)
+            return render_template('leccion.html', video=video, descripcion=descripcion, estado=estado, examen=examen, pantalla=pantalla)
+    return render_template('leccion.html', video=video, descripcion=descripcion, estado=estado, examen=examen, pantalla=pantalla)
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -22,13 +22,15 @@
 					<embed width="420" height="315" src="{{video}}">
 					<h1 class="instructor">Subí tu video realizando los movimientos de la lección para subir de nivel</h1>
 					<div class="col">
+					{% if estado == 'D' or estado == '' %}
 						{% with messages = get_flashed_messages() %}
 						{% if messages %}
 						{% for message in messages %}
-						<p class="text-center" id="error">{{message}}</p>
+						<p id="error">{{message}}</p>
 						{% endfor %}
 						{% endif %}
 						{% endwith %}
+					{% endif %}
 					</div>
 			
 				</div>
@@ -39,8 +41,8 @@
 					<div class="row justify-content-aroundtext-center">
 						{% if estado == 'D' or estado == '' %}
 							<form method="POST" enctype="multipart/form-data">
-								<input type="file" name="file">
-								<input type="submit" name="subida" value="Upload">
+								<input class=""type="file" name="file">
+								<input class="ingresar" type="submit" name="subida" value="Cargar">
 							</form>
 						{% endif %}
 					</div>
@@ -92,7 +94,7 @@
 										<option value="Desaprobado">Desaprobado</option>     
 									</select> 
 								</div>								
-								<div class="row justify-content-around"><button class="col-auto text-center boton" type="submit">Corregir</button></div>	
+								<div class="row justify-content-around"><button class="col-auto text-center boton ingresar" type="submit">Corregir</button></div>	
 							</div>			
 						{% endif %}
 					</div>

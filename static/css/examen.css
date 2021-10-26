@@ -5,6 +5,38 @@ body{
 a{
     text-decoration:none;
 }
+.ingresar{
+    font-family: Snowy Night;
+    background-color: #4CAF50;
+    border-radius: 50% 50% 50% 50%;
+    color: white;
+    text-decoration:none;
+    padding: 3% 3%;
+    border-style: groove;
+    font-size: 150%;
+    display:inline-block ;
+    
+}
+.ingresar:hover{
+        border-color: black;
+        color:red;
+        cursor: pointer;
+        background-color: #32AF50;
+}
+.listado{
+    font-family: Snowy Night;
+    background-color: #4CAF50;
+    border-radius: 50% 50% 50% 50%;
+    color: white;
+    outline-style: none;
+    border: none;
+    overflow-y: hidden;
+    text-decoration:none;
+    padding: 3% 3%;
+    border-style: groove;
+    font-size: 150%;
+    display:inline-block ;
+}
 .examen{
     font-family: Snowy Night;
     color: #B8860B;
