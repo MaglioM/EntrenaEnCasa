@@ -206,7 +206,7 @@ def examen(curso, nivel, idAlumno):
         #nota= examen[3]
      
     archivo = '{}{}{}.jpg'.format(idAlumno, session['idCurso'], leccion )
-    if request.method == "POST":
+    if request.method == "POST" and pantalla == 'alumno':
         if not "file" in request.files:
             flash("No hay ningun elemento de archivo!")
         f = request.files["file"]
@@ -219,7 +219,7 @@ def examen(curso, nivel, idAlumno):
         else:
             flash("Archivo no permitido!")
     if request.method == 'POST':
-        if request.form['subida']=='Upload':
+        if request.form['subida']=='Cargar':
             cursor = mysql.connection.cursor()
             cursor.execute('INSERT INTO '+base+'.Examen (idLeccion, idAlumno, Aprobado, urlVideo, idCurso) VALUES ("{}", "{}", "{}", "{}", "{}")'.format(leccion, idAlumno, 'P', archivo, session['idCurso']))
             mysql.connection.commit()
