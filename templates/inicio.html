@@ -37,16 +37,16 @@
             <h1 class="examen">{{evaluacion}}:</h1>
             {%for examen in examenes%}              
                 <div class="row justify-content-center">
-                    <a class="col-6 text-center instructor" href="../examen/{{nombreCursos[examen[0]-1][1]}}/{{niveles[examen[0]-1][0]}}/{{alumnos[examen[0]-1][1]}}">
+                    <a class="col-6 text-center instructor" href="../examen/{{examen[3]}}/{{examen[4]}}/{{examen[1]}}">
                         <div class="row">
                             <div class="col-4">                                
-                                <h5>Alumno: {{alumnos[examen[0]-1][0]}}</h5>                                
+                                <h5>Alumno: {{examen[0]}}</h5>                                
                             </div>
                             <div class="col-4">                                
-                                <h5>Curso: {{nombreCursos[examen[0]-1][0]}}</h5>                                
+                                <h5>Curso: {{examen[2]}}</h5>                                
                             </div>
                             <div class="col-4">                                
-                                <h5>Nivel: {{niveles[examen[0]-1][0]}}</h5>  
+                                <h5>Nivel: {{examen[4]}}</h5>  
                             </div>
                         </div>
                     </a>			

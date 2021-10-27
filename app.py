@@ -5,7 +5,7 @@ from werkzeug.utils import secure_filename
 import os
 
 UPLOAD_FOLDER = os.path.abspath("./static/examen_alumno")
-ALLOWED_EXTENSIONS = set(["png", "jpg", "jpge"])
+ALLOWED_EXTENSIONS = set(["mp4", "mov", "avi", "mkv"])
 
 
 def allowed_file(filename):
@@ -105,31 +105,25 @@ def ingresado():
                 passValida = cursor.fetchall()[0][0]
                 if request.form['pass'] == passValida:
                     #Buscar los examenes en la base para mostrar en pantalla
-                    cursor.execute('SELECT * FROM '+base+'.Examen where Aprobado ="P"')
-                    examenes = cursor.fetchall()
-                    cursor.execute('SELECT Nombre, IdAlumno FROM '+base+'.Alumnos INER JOIN '+base+'.Examen USING(idAlumno)')
-                    alumnos = cursor.fetchall()
-                    cursor.execute('SELECT Nombre, idCurso FROM '+base+'.Curso INER JOIN '+base+'.Examen USING(idCurso)')
-                    nombreCursos = cursor.fetchall()
-                    cursor.execute('SELECT Nivel, idLeccion FROM '+base+'.Leccion INER JOIN '+base+'.Examen USING(idLeccion)')
-                    niveles = cursor.fetchall()
-                    cursor.execute('SELECT * FROM '+base+'.Curso')
-                    curso = cursor.fetchall()
+                    cursor.execute('''SELECT a.Nombre, a.idAlumno, c.Nombre, c.idCurso, l.Nivel FROM Examen e
+                                    INNER JOIN Leccion l ON l.IdLeccion = e.IdLeccion
+                                    INNER JOIN Curso c on l.IdCurso = c.IdCurso
+                                    INNER JOIN Alumnos a on a.IdAlumno = e.IdAlumno
+                                    WHERE e.Aprobado="P"''')
+                    examenes=cursor.fetchall()
                     cursor.execute('SELECT Nombre, IdInstructor FROM '+base+'.Instructores WHERE Email = '+'"'+(request.form['email']+'"'))
                     resultados=cursor.fetchall()
                     nombre = resultados[0][0]
                     #Guardar en la sesión al instrructor y dirigirlo al inicio
                     session['idInstructor'] = resultados[0][1]
                     descripcion=""
-                    return render_template('inicio.html', nombre=nombre, examenes=examenes, alumnos=alumnos, nombreCursos=nombreCursos, niveles=niveles, curso=curso, descripcion=descripcion)
+                    return render_template('inicio.html', nombre=nombre, examenes=examenes, curso=curso, descripcion=descripcion)
                 else:
                     flash("Usuario no registrado")
                     return redirect(url_for('login'))
             else:
                 flash("Usuario no registrado")
                 return redirect(url_for('login'))
-#INSERT INTO Examen ( idLeccion, idAlumno, idInstructor, Aprobado, urlVideo, intentos, idCurso) VALUES ( 1, 11, 2, 'P', 'dasdsa', 0, 2)
-#ALTER TABLE Examen AUTO_INCREMENT=6
         #validación de login alumno
         if request.form['usuario'] == "Alumno":
             session['pantalla']= "Alumno"
@@ -188,24 +182,39 @@ def examen(curso, nivel, idAlumno):
         pantalla='alumno'    
 
     cursor = mysql.connection.cursor()    
-    cursor.execute('SELECT Descripcion, urlVideo, idLeccion FROM '+base+'.Leccion WHERE idCurso={} AND Nivel={}'.format(session['idCurso'], nivel))
-    infoCurso = cursor.fetchall()[0]
-    descripcion = infoCurso[0]
-    video = infoCurso[1]
-    leccion= infoCurso[2]
-    cursor.execute('SELECT Aprobado FROM '+base+'.Examen WHERE idAlumno={} AND idLeccion={} AND idCurso={}'.format(idAlumno, leccion, session['idCurso']))
-    if cursor.fetchall() == ():
-        estado='' 
-        #nota=''
-        examen=''    
-    else:
-        cursor.execute('SELECT Aprobado, urlVideo FROM '+base+'.Examen WHERE idAlumno={} AND idLeccion={} AND idCurso'.format(idAlumno, leccion, session['idCurso']))
+    if pantalla=='alumno':
+        cursor.execute('SELECT Descripcion, urlVideo, idLeccion FROM '+base+'.Leccion WHERE idCurso={} AND Nivel={}'.format(session['idCurso'], nivel))
+        infoCurso = cursor.fetchall()[0]
+        descripcion = infoCurso[0]
+        video = infoCurso[1]
+        leccion= infoCurso[2]
+        archivo = '{}{}{}.mp4'.format(idAlumno, session['idCurso'], leccion )
+        cursor.execute('''SELECT e.Aprobado, e.urlVideo FROM Examen e 
+                        INNER JOIN Leccion l ON l.idLeccion=e.idLeccion
+                        INNER JOIN Curso c ON c.idCurso=l.idCurso
+                        WHERE e.idAlumno={} AND c.idCurso={} AND l.Nivel={}
+                        ORDER BY 1 DESC'''.format(idAlumno,session['idCurso'],nivel))
+        resultados=cursor.fetchall()
+        if len(resultados)== 0:
+            estado=''
+            videoExamen=''
+        else:
+            examen=resultados[0]
+            estado=examen[0]
+            videoExamen=examen[1]
+
+    if pantalla=='instructor':
+        cursor.execute('''SELECT e.Aprobado, e.urlVideo, e.idExamen FROM Examen e
+                        INNER JOIN Leccion l ON l.IdLeccion = e.IdLeccion AND l.IdCurso={} AND l.Nivel = {}
+                        WHERE e.IdAlumno = {}
+                        ORDER BY 1 DESC'''.format(curso,nivel,idAlumno))
         examen= cursor.fetchall()[0]
         estado= examen[0]
-        examen= examen[1]
-        #nota= examen[3]
+        videoExamen= examen[1]
+        idExamen = examen[2]
+        video=''
+        descripcion=''
      
-    archivo = '{}{}{}.jpg'.format(idAlumno, session['idCurso'], leccion )
     if request.method == "POST" and pantalla == 'alumno':
         if not "file" in request.files:
             flash("No hay ningun elemento de archivo!")
@@ -218,13 +227,23 @@ def examen(curso, nivel, idAlumno):
             flash("Examen entregado!")
         else:
             flash("Archivo no permitido!")
-    if request.method == 'POST':
         if request.form['subida']=='Cargar':
             cursor = mysql.connection.cursor()
-            cursor.execute('INSERT INTO '+base+'.Examen (idLeccion, idAlumno, Aprobado, urlVideo, idCurso) VALUES ("{}", "{}", "{}", "{}", "{}")'.format(leccion, idAlumno, 'P', archivo, session['idCurso']))
+            cursor.execute('INSERT INTO '+base+'.Examen (idLeccion, idAlumno, urlVideo, idCurso) VALUES ("{}", "{}", "{}", "{}")'.format(leccion, idAlumno, archivo, session['idCurso']))
             mysql.connection.commit()
-            return render_template('leccion.html', video=video, descripcion=descripcion, estado=estado, examen=examen, pantalla=pantalla)
-    return render_template('leccion.html', video=video, descripcion=descripcion, estado=estado, examen=examen, pantalla=pantalla)
+            return render_template('leccion.html', video=video, descripcion=descripcion, estado=estado, videoExamen=videoExamen, pantalla=pantalla)
+    elif request.method == "POST" and pantalla == 'instructor':
+        if request.form['evaluacion'] == 'Aprobado':
+            cursor.execute('UPDATE '+base+'.Examen SET Aprobado = "A" WHERE IdExamen = {}'.format(idExamen))
+            mysql.connection.commit()
+            cursor.execute('UPDATE '+base+'.Alumno_Curso SET Nivel = {} WHERE IdCurso = {} AND IdAlumno = {}'.format(str(int(nivel)+1),curso,idAlumno))
+            mysql.connection.commit()
+            return render_template('inicio.html', nombre=nombre, examenes=examenes, curso=curso, descripcion=descripcion)
+        elif request.form['evaluacion'] == 'Desaprobado':
+            cursor.execute('UPDATE '+base+'.Examen SET Aprobado = "D" WHERE IdExamen = {}'.format(idExamen))
+            mysql.connection.commit()
+            return render_template('inicio.html', nombre=nombre, examenes=examenes, curso=curso, descripcion=descripcion)
+    return render_template('leccion.html', video=video, descripcion=descripcion, estado=estado, videoExamen=videoExamen, pantalla=pantalla)
 
 if __name__ == "__main__":
     app.run(debug=True)
