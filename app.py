@@ -114,6 +114,7 @@ def ingresado():
                     cursor.execute('SELECT Nombre, IdInstructor FROM '+base+'.Instructores WHERE Email = '+'"'+(request.form['email']+'"'))
                     resultados=cursor.fetchall()
                     nombre = resultados[0][0]
+                    session['nombre']=nombre
                     #Guardar en la sesión al instrructor y dirigirlo al inicio
                     session['idInstructor'] = resultados[0][1]
                     descripcion=""
@@ -238,11 +239,18 @@ def examen(curso, nivel, idAlumno):
             mysql.connection.commit()
             cursor.execute('UPDATE '+base+'.Alumno_Curso SET Nivel = {} WHERE IdCurso = {} AND IdAlumno = {}'.format(str(int(nivel)+1),curso,idAlumno))
             mysql.connection.commit()
-            return render_template('inicio.html', nombre=nombre, examenes=examenes, curso=curso, descripcion=descripcion)
+            cursor.execute('''SELECT a.Nombre, a.idAlumno, c.Nombre, c.idCurso, l.Nivel FROM Examen e
+                                    INNER JOIN Leccion l ON l.IdLeccion = e.IdLeccion
+                                    INNER JOIN Curso c on l.IdCurso = c.IdCurso
+                                    INNER JOIN Alumnos a on a.IdAlumno = e.IdAlumno
+                                    WHERE e.Aprobado="P"''')
+            examenes=cursor.fetchall()
+            session['examenes']=examenes
+            return render_template('inicio.html', nombre=session['nombre'], examenes=examenes, curso=curso, descripcion=descripcion)
         elif request.form['evaluacion'] == 'Desaprobado':
             cursor.execute('UPDATE '+base+'.Examen SET Aprobado = "D" WHERE IdExamen = {}'.format(idExamen))
             mysql.connection.commit()
-            return render_template('inicio.html', nombre=nombre, examenes=examenes, curso=curso, descripcion=descripcion)
+            return render_template('inicio.html', nombre=session['nombre'], examenes=session['examenes'], curso=curso, descripcion=descripcion)
     return render_template('leccion.html', video=video, descripcion=descripcion, estado=estado, videoExamen=videoExamen, pantalla=pantalla)
 
 if __name__ == "__main__":
