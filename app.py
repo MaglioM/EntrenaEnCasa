@@ -84,7 +84,7 @@ def registered():
 def login():
     return render_template('login.html')
 
-@app.route('/ingresado', methods=['POST'])
+@app.route('/ingresado', methods=['POST','GET'])
 def ingresado():    
         #validación de login instructor
         if request.form['usuario'] == "Instructor":
@@ -232,7 +232,7 @@ def examen(curso, nivel, idAlumno):
             cursor = mysql.connection.cursor()
             cursor.execute('INSERT INTO '+base+'.Examen (idLeccion, idAlumno, urlVideo, idCurso) VALUES ("{}", "{}", "{}", "{}")'.format(leccion, idAlumno, archivo, session['idCurso']))
             mysql.connection.commit()
-            return render_template('leccion.html', video=video, descripcion=descripcion, estado=estado, videoExamen=videoExamen, pantalla=pantalla)
+            return redirect(url_for('ingresado'))
     elif request.method == "POST" and pantalla == 'instructor':
         if request.form['evaluacion'] == 'Aprobado':
             cursor.execute('UPDATE '+base+'.Examen SET Aprobado = "A" WHERE IdExamen = {}'.format(idExamen))
@@ -245,12 +245,18 @@ def examen(curso, nivel, idAlumno):
                                     INNER JOIN Alumnos a on a.IdAlumno = e.IdAlumno
                                     WHERE e.Aprobado="P"''')
             examenes=cursor.fetchall()
-            session['examenes']=examenes
             return render_template('inicio.html', nombre=session['nombre'], examenes=examenes, curso=curso, descripcion=descripcion)
         elif request.form['evaluacion'] == 'Desaprobado':
+            redirect(url_for('ingresado'))
             cursor.execute('UPDATE '+base+'.Examen SET Aprobado = "D" WHERE IdExamen = {}'.format(idExamen))
             mysql.connection.commit()
-            return render_template('inicio.html', nombre=session['nombre'], examenes=session['examenes'], curso=curso, descripcion=descripcion)
+            cursor.execute('''SELECT a.Nombre, a.idAlumno, c.Nombre, c.idCurso, l.Nivel FROM Examen e
+                                    INNER JOIN Leccion l ON l.IdLeccion = e.IdLeccion
+                                    INNER JOIN Curso c on l.IdCurso = c.IdCurso
+                                    INNER JOIN Alumnos a on a.IdAlumno = e.IdAlumno
+                                    WHERE e.Aprobado="P"''')
+            examenes=cursor.fetchall()
+            return render_template('inicio.html', nombre=session['nombre'], examenes=examenes, curso=curso, descripcion=descripcion)
     return render_template('leccion.html', video=video, descripcion=descripcion, estado=estado, videoExamen=videoExamen, pantalla=pantalla)
 
 if __name__ == "__main__":
